@@ -1,0 +1,176 @@
+html{
+    display: flex;
+    text-align: center;
+    font-family: 'Comic Neue', cursive;
+    font-size: 2vh;
+}
+
+body{
+    display: flex;
+    margin-left: 40%;
+    margin-top:10%;
+}
+
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.zeroLane{
+    display:flex;
+}
+.result{
+    font-size: 4rem;
+    text-align: right;
+    width: 40.1vh;
+    flex-grow: 1;
+    flex-basis:100%;
+    height: 10vh;
+    border: 1px solid black;
+    margin-left: -1px;
+    color: white;
+    background-color: #1C1C1C;
+}
+
+.allnumbers{
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+button{
+    display: flex;
+    border: 0px;
+    justify-content: center;
+    font-family: 'Comic Neue', cursive;
+    font-size: 8vh;
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 0;
+    min-height:0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.numbers{
+    display:flex;
+    width: 40.2vh;
+    flex-wrap: wrap;
+    background-color: #d4d4d2;
+}
+.number{
+    flex-basis: 20%;
+    flex-grow: 1;
+    height:10vh;
+    outline: 1px solid black;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number:hover{
+    background-color: #a3a3a3;
+}
+
+.multiple{
+    flex-basis:25%;
+}
+
+.times{
+    flex-grow:1;
+    flex-basis: 25%;
+
+}
+
+.operation{
+    display:flex;
+    flex-basis: 20%;
+    flex-grow: 1;
+    height:10vh;
+    outline: 1px solid black;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+
+
+.num0{
+    flex-grow:2.1;
+    flex-basis: 40%;
+}
+
+.right{
+    background-color: #FF9500;
+    color: white;
+}
+.right:hover{
+    background-color: #bf7000;
+}
+
+.activeOperationOrange{
+    background-color: #995a00;
+}
+
+
+
+.number:active{
+    background-color: grey;
+}
+
+.activeNumber{
+    background-color: grey;
+}
+
+.operation:active{
+    background-color: grey;
+}
+
+
+.equal{
+    display:flex;
+    flex-basis: 20%;
+    flex-grow: 1;
+    height:10vh;
+    outline: 1px solid black;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+.equal:active{
+    background-color: grey;
+}
+.instantOperation{
+    display:flex;
+    flex-basis: 20%;
+    flex-grow: 1;
+    height:10vh;
+    outline: 1px solid black;
+    margin-top: 1px;
+    margin-left: 1px;
+    background-color: #a3a3a3;
+}
+.delete{
+    background-color: #a3a3a3;
+}
+.delete:hover{
+    background-color: #999999;
+}
+
+.delete:active{
+    background-color: grey;
+}
+
+.instantOperation:hover{
+    background-color: #999999;
+}
+
+.right:active{
+    background-color: #995a00;
+}
+
+.instantOperation:active{
+    background-color: grey;
+}
