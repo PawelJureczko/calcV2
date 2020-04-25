@@ -9,10 +9,9 @@ let initialValues = {
     finalResult: 0,
     dotCounter: 0,
     isDot: false,
-    prevOperation: '',
     resultFlag: false,
-    isNextNumber: false,
-    isOperation: false,
+    isFirstNumber: false,
+    shouldCalculate: true,
 }
 
 allButtons.addEventListener("click", function(e){
@@ -21,27 +20,25 @@ allButtons.addEventListener("click", function(e){
     }
     else {
         if (e.target.dataset.actiontype==="operation"){
-                if(initialValues.firstNumber===0){
-                saveFirstNumber(e.target);
-                } else {
-                saveNextNumber(e.target);
+            if(!initialValues.isFirstNumber){
+                initialValues.isFirstNumber=true;
+                saveFirstNumber();
+                saveOperation(e.target);
+            } else {
+                saveNextNumber();
+                if (initialValues.shouldCalculate){
+                    calculate();
                 }
                 saveOperation(e.target);
-                if(initialValues.operation!==''){
-                    if(initialValues.isNextNumber){
-                    calculate();
-                    }
-                    saveNextNumber(e.target);
-                }
-            } else if (e.target.dataset.actiontype==="result"){
-                saveNextNumber(e.target);
-                calculate();
-                initialValues.resultFlag=true;
-            } else if (e.target.dataset.actiontype==="clear"){
-                clearCalc();
             }
+        } else if (e.target.dataset.actiontype==="clear"){
+            clearCalc();
+        } else if (e.target.dataset.actiontype==="result"){
+            saveNextNumber();
+            calculate();
         }
     }
+}
 )
 
 function calculate(){
@@ -65,7 +62,7 @@ function calculate(){
         default:
             result.textContent="error";
         }
-
+        initialValues.shouldCalculate=false;
     initialValues.firstNumber=initialValues.finalResult;
 }
 
@@ -74,6 +71,7 @@ function fillArray(element){//while there's no operation, it's filling char arra
         clearCalc();
         initialValues.resultFlag=false;
     }
+    initialValues.shouldCalculate=true;
     if (element.textContent==="."){
         initialValues.dotCounter++;
         initialValues.isDot=true;
@@ -97,31 +95,31 @@ function prepareCharArray(){
     initialValues.dotCounter=0;
 }
 
-function saveFirstNumber(element){//save first number when operation button is pressed
+function saveFirstNumber(){//save first number when operation button is pressed
     initialValues.firstNumber=parseFloat(initialValues.charArray.join(""));
 
     console.log("firstnumber",initialValues.firstNumber);
     prepareCharArray();
 }
-function saveNextNumber(element){//save next number when operation button is pressed
-    if (initialValues.nextNumber===0 && initialValues.charArray.length>0){
+function saveNextNumber(){//save next number when operation button is pressed
+    if (initialValues.charArray.length>0){
         initialValues.nextNumber=parseFloat(initialValues.charArray.join(""));
     }
-    initialValues.prevOperation=initialValues.operation;
     initialValues.isNextNumber=true;
+    console.log("nextNumber", initialValues.nextNumber);
     prepareCharArray();
 }
 
 function saveOperation(element){
     initialValues.operation=element.textContent;
     console.log(initialValues.operation);
-    console.log(initialValues.prevOperation);
 }
 
 function clearCalc(){ //clear object values to default when it's pressed
     initialValues.charArray=[];
     initialValues.firstNumber=0;
     initialValues.nextNumber=0;
+    initialValues.isFirstNumber=false;
     initialValues.isNextNumber=false;
     result.textContent='';
 }
