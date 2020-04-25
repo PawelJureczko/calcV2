@@ -11,6 +11,7 @@ let initialValues = {
     isDot: false,
     resultFlag: false,
     isFirstNumber: false,
+    isOperation: false,
     shouldCalculate: true,
 }
 
@@ -20,6 +21,7 @@ allButtons.addEventListener("click", function(e){
     }
     else {
         if (e.target.dataset.actiontype==="operation"){
+            initialValues.isOperation=true;
             if(!initialValues.isFirstNumber){
                 initialValues.isFirstNumber=true;
                 saveFirstNumber();
@@ -34,6 +36,8 @@ allButtons.addEventListener("click", function(e){
         } else if (e.target.dataset.actiontype==="clear"){
             clearCalc();
         } else if (e.target.dataset.actiontype==="result"){
+            initialValues.resultFlag=true;
+            initialValues.isOperation=false;
             saveNextNumber();
             calculate();
         }
@@ -67,7 +71,7 @@ function calculate(){
 }
 
 function fillArray(element){//while there's no operation, it's filling char array
-    if(initialValues.resultFlag){
+    if(initialValues.resultFlag && !initialValues.isOperation){
         clearCalc();
         initialValues.resultFlag=false;
     }
