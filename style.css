@@ -2,39 +2,33 @@ html{
     display: flex;
     text-align: center;
     font-family: 'Comic Neue', cursive;
-    font-size: 2vh;
+    font-size: 16px;
 }
 
 body{
     display: flex;
-    margin-left: 40%;
-    margin-top:10%;
+    margin-left: 12rem;
+    margin-top:4rem;
 }
 
+/* .calc{
+    outline: 1px solid black;
+} */
 
-span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-
-.zeroLane{
-    display:flex;
-}
 .result{
-    font-size: 4rem;
+    font-size: 5rem;
     text-align: right;
-    width: 40.1vh;
+    width: 25rem;
     flex-grow: 1;
     flex-basis:100%;
-    height: 10vh;
-    border: 1px solid black;
+    height: 6rem;
+    /* border: 1px solid black; */
+    border-right: none;
     margin-left: -1px;
     color: white;
     background-color: #1C1C1C;
 }
+
 
 .allnumbers{
     margin-top: -1px;
@@ -43,10 +37,10 @@ span {
 
 button{
     display: flex;
-    border: 0px;
+    border: none;
     justify-content: center;
     font-family: 'Comic Neue', cursive;
-    font-size: 8vh;
+    font-size: 3rem;
     flex-basis: 0;
     flex-grow: 1;
     min-width: 0;
@@ -57,15 +51,15 @@ button{
 
 .numbers{
     display:flex;
-    width: 40.2vh;
+    width: 25rem;
     flex-wrap: wrap;
     background-color: #d4d4d2;
 }
 .number{
     flex-basis: 20%;
     flex-grow: 1;
-    height:10vh;
-    outline: 1px solid black;
+    height:6rem;
+    /* outline: 1px solid black; */
     margin-top: 1px;
     margin-left: 1px;
     display: flex;
@@ -91,15 +85,15 @@ button{
     display:flex;
     flex-basis: 20%;
     flex-grow: 1;
-    height:10vh;
-    outline: 1px solid black;
+    height:6rem;
+    /* outline: 1px solid black; */
     margin-top: 1px;
     margin-left: 1px;
 }
 
 
 .num0{
-    flex-grow:2.1;
+    flex-grow:2.05;
     flex-basis: 40%;
 }
 
@@ -134,8 +128,8 @@ button{
     display:flex;
     flex-basis: 20%;
     flex-grow: 1;
-    height:10vh;
-    outline: 1px solid black;
+    height:6rem;
+    /* outline: 1px solid black; */
     margin-top: 1px;
     margin-left: 1px;
 }
@@ -146,8 +140,8 @@ button{
     display:flex;
     flex-basis: 20%;
     flex-grow: 1;
-    height:10vh;
-    outline: 1px solid black;
+    height:6rem;
+    /* outline: 1px solid black; */
     margin-top: 1px;
     margin-left: 1px;
     background-color: #a3a3a3;
@@ -173,4 +167,7 @@ button{
 
 .instantOperation:active{
     background-color: grey;
+}
+
+button:focus {outline:0;
 }

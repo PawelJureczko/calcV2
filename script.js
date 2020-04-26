@@ -44,8 +44,18 @@ allButtons.addEventListener("click", function(e){
             instOperation(e.target);
         }
     }
-}
+    }
 )
+
+function setFontSize(element){
+    if(element.textContent.length>7 && element.textContent.length<18){
+        let temp = 1.3*(element.textContent.length/10);
+        element.style.fontSize=`${5-temp}rem`;
+        console.log("mniej")
+    } if (element.textContent.length>=18){
+        element.textContent="Number too large";
+    }
+}
 
 function instOperation(element){
     if (element.textContent==="+/-"){
@@ -98,6 +108,7 @@ function calculate(){
         case '+':
             initialValues.finalResult=initialValues.firstNumber+initialValues.nextNumber;
             result.textContent=initialValues.finalResult;
+            setFontSize(result);
             break;
         case '-':
             initialValues.finalResult=initialValues.firstNumber-initialValues.nextNumber;
@@ -105,13 +116,17 @@ function calculate(){
             break;
         case 'x':
             initialValues.finalResult=initialValues.firstNumber*initialValues.nextNumber;
+            initialValues.finalResult=Math.round(initialValues.finalResult*1000)/1000;
+            setFontSize(result);
             result.textContent=initialValues.finalResult;
             break;
         case '÷':
             if(initialValues.nextNumber!==0){
             initialValues.finalResult=initialValues.firstNumber/initialValues.nextNumber;
+            initialValues.finalResult=Math.round(initialValues.finalResult*1000)/1000;
             result.textContent=initialValues.finalResult;
             } else {
+                clearCalc();
                 result.textContent="Cannot divide by 0";
             }
             break;
@@ -138,7 +153,7 @@ function fillArray(element){//while there's no operation, it's filling char arra
 
     if (initialValues.isDot===true && element.textContent==="." && initialValues.dotCounter>1){
         initialValues.dotCounter=1;
-    } else {
+    } else if (initialValues.charArray.length<8){
     initialValues.charArray.push(element.textContent);
     if (initialValues.charArray[0]==="0" && !initialValues.isFirstNumber){
         initialValues.charArray=[];
@@ -182,4 +197,5 @@ function clearCalc(){ //clear object values to default when it's pressed
     initialValues.isFirstNumber=false;
     initialValues.isNextNumber=false;
     result.textContent='0';
+    result.style.fontSize="5rem";
 }
