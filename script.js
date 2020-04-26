@@ -48,7 +48,9 @@ allButtons.addEventListener("click", function(e){
 )
 
 function setFontSize(element){
-        let temp = 1.6*(element.textContent.length/10);
+        let temp = 1.6*(initialValues.finalResult.toString().length/10);
+        console.log("temp", temp);
+        console.log("initialvalue", initialValues.finalResult)
         element.style.fontSize=`${5-temp}rem`;
 }
 
@@ -61,11 +63,13 @@ function instOperation(element){
         temp = temp *(-1);
         initialValues.firstNumber=temp;
         result.textContent=temp;
+        setFontSize(result);
         }
         else {
         temp=temp*(-1);
         initialValues.nextNumber=temp;
         result.textContent=temp;
+        setFontSize(result);
         initialValues.isInstaOper=true;
         }
         initialValues.isFirstNumber=true;
@@ -81,11 +85,13 @@ function instOperation(element){
         temp = temp /100;
         initialValues.firstNumber=temp;
         result.textContent=temp;
+        setFontSize(result);
         }
         else {
         temp=temp/100;
         initialValues.nextNumber=temp;
         result.textContent=temp;
+        setFontSize(result);
         initialValues.isInstaOper=true;
         }
         initialValues.isFirstNumber=true;
@@ -102,11 +108,15 @@ function calculate(){
     switch(initialValues.operation){
         case '+':
             initialValues.finalResult=initialValues.firstNumber+initialValues.nextNumber;
+            initialValues.finalResult=Math.round(initialValues.finalResult*1000)/1000;
+            setFontSize(result);
             result.textContent=initialValues.finalResult;
             setFontSize(result);
             break;
         case '-':
             initialValues.finalResult=initialValues.firstNumber-initialValues.nextNumber;
+            initialValues.finalResult=Math.round(initialValues.finalResult*1000)/1000;
+            setFontSize(result);
             result.textContent=initialValues.finalResult;
             break;
         case 'x':
@@ -119,6 +129,7 @@ function calculate(){
             if(initialValues.nextNumber!==0){
             initialValues.finalResult=initialValues.firstNumber/initialValues.nextNumber;
             initialValues.finalResult=Math.round(initialValues.finalResult*1000)/1000;
+            setFontSize(result);
             result.textContent=initialValues.finalResult;
             } else {
                 clearCalc();
@@ -132,8 +143,6 @@ function calculate(){
         initialValues.firstNumber=initialValues.finalResult;
         console.log("finalasd", initialValues.firstNumber, "nextNum", initialValues.nextNumber);
 }
-
-
 
 function fillArray(element){//while there's no operation, it's filling char array
     if(initialValues.resultFlag && !initialValues.isOperation){
