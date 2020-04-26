@@ -13,6 +13,7 @@ let initialValues = {
     isFirstNumber: false,
     isOperation: false,
     shouldCalculate: true,
+    isInstaOper: false,
 }
 
 allButtons.addEventListener("click", function(e){
@@ -47,16 +48,52 @@ allButtons.addEventListener("click", function(e){
 )
 
 function instOperation(element){
-    if(!initialValues.isFirstNumber){
-        saveFirstNumber();
-        console.log("instoper first", initialValues.firstNumber);
+    if (element.textContent==="+/-"){
+    let temp = result.textContent;
+    temp = parseFloat(temp);
+    if(!isNaN(temp)){
+        if (initialValues.firstNumber===0 || initialValues.firstNumber===temp){
+        temp = temp *(-1);
+        initialValues.firstNumber=temp;
+        result.textContent=temp;
+        }
+        else {
+        temp=temp*(-1);
+        initialValues.nextNumber=temp;
+        result.textContent=temp;
+        initialValues.isInstaOper=true;
+        }
+        initialValues.isFirstNumber=true;
+        initialValues.shouldCalculate=false;
+        initialValues.resultFlag=true;
+        }
+
     } else {
-        saveNextNumber();
-        console.log("instoper next", initialValues.nextNumber);
+        let temp = result.textContent;
+    temp = parseFloat(temp);
+    if(!isNaN(temp)){
+        if (initialValues.firstNumber===0 || initialValues.firstNumber===temp){
+        temp = temp /100;
+        initialValues.firstNumber=temp;
+        result.textContent=temp;
+        }
+        else {
+        temp=temp/100;
+        initialValues.nextNumber=temp;
+        result.textContent=temp;
+        initialValues.isInstaOper=true;
+        }
+        initialValues.isFirstNumber=true;
+        initialValues.shouldCalculate=false;
+        initialValues.resultFlag=true;
+        }
     }
 }
 
 function calculate(){
+    if(isNaN(initialValues.firstNumber)){
+        initialValues.firstNumber=0;
+    }
     switch(initialValues.operation){
         case '+':
             initialValues.finalResult=initialValues.firstNumber+initialValues.nextNumber;
@@ -82,8 +119,8 @@ function calculate(){
             result.textContent="error";
         }
         initialValues.shouldCalculate=false;
-    initialValues.firstNumber=initialValues.finalResult;
-    console.log("finalasd", initialValues.first, "nextNum", initialValues.nextNumber);
+        initialValues.firstNumber=initialValues.finalResult;
+        console.log("finalasd", initialValues.firstNumber, "nextNum", initialValues.nextNumber);
 }
 
 
@@ -115,26 +152,27 @@ function prepareCharArray(){
     initialValues.charArray=[];
     initialValues.isDot=false;
     initialValues.dotCounter=0;
+    initialValues.isInstaOper=false;
 }
 
 function saveFirstNumber(){//save first number when operation button is pressed
     initialValues.firstNumber=parseFloat(initialValues.charArray.join(""));
     initialValues.isFirstNumber=true;
-    console.log("firstnumber",initialValues.firstNumber);
+    // console.log("firstnumber",initialValues.firstNumber);
     prepareCharArray();
 }
 function saveNextNumber(){//save next number when operation button is pressed
-    if (initialValues.charArray.length>0){
+    if (initialValues.charArray.length>0 && !initialValues.isInstaOper){
         initialValues.nextNumber=parseFloat(initialValues.charArray.join(""));
     }
     initialValues.isNextNumber=true;
-    console.log("nextNumber", initialValues.nextNumber);
+    // console.log("nextNumber", initialValues.nextNumber);
     prepareCharArray();
 }
 
 function saveOperation(element){
     initialValues.operation=element.textContent;
-    console.log(initialValues.operation);
+    // console.log(initialValues.operation);
 }
 
 function clearCalc(){ //clear object values to default when it's pressed
@@ -143,7 +181,5 @@ function clearCalc(){ //clear object values to default when it's pressed
     initialValues.nextNumber=0;
     initialValues.isFirstNumber=false;
     initialValues.isNextNumber=false;
-    result.textContent='';
+    result.textContent='0';
 }
-
-
