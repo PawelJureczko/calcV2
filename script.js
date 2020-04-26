@@ -48,13 +48,8 @@ allButtons.addEventListener("click", function(e){
 )
 
 function setFontSize(element){
-    if(element.textContent.length>7 && element.textContent.length<18){
-        let temp = 1.3*(element.textContent.length/10);
+        let temp = 1.6*(element.textContent.length/10);
         element.style.fontSize=`${5-temp}rem`;
-        console.log("mniej")
-    } if (element.textContent.length>=18){
-        element.textContent="Number too large";
-    }
 }
 
 function instOperation(element){
