@@ -23,7 +23,6 @@ allButtons.addEventListener("click", function(e){
         if (e.target.dataset.actiontype==="operation"){
             initialValues.isOperation=true;
             if(!initialValues.isFirstNumber){
-                initialValues.isFirstNumber=true;
                 saveFirstNumber();
                 saveOperation(e.target);
             } else {
@@ -40,10 +39,22 @@ allButtons.addEventListener("click", function(e){
             initialValues.isOperation=false;
             saveNextNumber();
             calculate();
+        } else if (e.target.dataset.actiontype="instantOperation"){
+            instOperation(e.target);
         }
     }
 }
 )
+
+function instOperation(element){
+    if(!initialValues.isFirstNumber){
+        saveFirstNumber();
+        console.log("instoper first", initialValues.firstNumber);
+    } else {
+        saveNextNumber();
+        console.log("instoper next", initialValues.nextNumber);
+    }
+}
 
 function calculate(){
     switch(initialValues.operation){
@@ -60,15 +71,22 @@ function calculate(){
             result.textContent=initialValues.finalResult;
             break;
         case '÷':
+            if(initialValues.nextNumber!==0){
             initialValues.finalResult=initialValues.firstNumber/initialValues.nextNumber;
             result.textContent=initialValues.finalResult;
+            } else {
+                result.textContent="Cannot divide by 0";
+            }
             break;
         default:
             result.textContent="error";
         }
         initialValues.shouldCalculate=false;
     initialValues.firstNumber=initialValues.finalResult;
+    console.log("finalasd", initialValues.first, "nextNum", initialValues.nextNumber);
 }
+
+
 
 function fillArray(element){//while there's no operation, it's filling char array
     if(initialValues.resultFlag && !initialValues.isOperation){
@@ -85,7 +103,7 @@ function fillArray(element){//while there's no operation, it's filling char arra
         initialValues.dotCounter=1;
     } else {
     initialValues.charArray.push(element.textContent);
-    if (initialValues.charArray[0]==="0"){
+    if (initialValues.charArray[0]==="0" && !initialValues.isFirstNumber){
         initialValues.charArray=[];
     }
     let temp = initialValues.charArray.join("");
@@ -101,7 +119,7 @@ function prepareCharArray(){
 
 function saveFirstNumber(){//save first number when operation button is pressed
     initialValues.firstNumber=parseFloat(initialValues.charArray.join(""));
-
+    initialValues.isFirstNumber=true;
     console.log("firstnumber",initialValues.firstNumber);
     prepareCharArray();
 }
